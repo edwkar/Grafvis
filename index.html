@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+    <script src="./ploth.js"></script>
+    <title>ploth</title> 
+    <link rel="stylesheet" href="./ploth.css" />
+</head>
+
+<body>
+  <div class="container">
+    <h1>Edster Beta aka. Graf-Vis</h1>
+
+    <canvas id="canvas" width="950" height="400"></canvas>
+
+    <div class="controls">
+      <div id="equations" class="panel">
+        <h2>Equations</h2>
+      </div>
+      <div class="panel">
+        <h2>Settings</h2>
+        <strong>xLow:</strong>  <input id="xLow"  type="text" size=5" />
+        <strong>xHigh:</strong> <input id="xHigh" type="text" size=5" />
+        <br />
+        <strong>yLow:</strong>  <input id="yLow"  type="text" size=5" />
+        <strong>yHigh:</strong> <input id="yHigh" type="text" size=5" />
+        <br />
+        <br />
+        <br />
+        <h2>Link to plot</h2>
+        <textarea id="url" readonly></textarea>
+      </div>
+      <div class="clear">
+    </div>
+  </div>
+  <div class="container">
+    <hr />
+    <p>
+    The purpose of this application is to easily allow dirt-simple dynamic
+    plotting of functions.  The equations may refer to any member of the
+    standard <a
+      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math">Math</a>
+    object.
+    </p>
+    
+    <p>
+    Per now, the application only supports basic plotting from one independant
+    variable (x) and one time variable (t) in a cartesian coordinate system.
+    Suggestions for extensions are most welcome.
+    </p>
+  </div>
+</body>
+
+</html>
