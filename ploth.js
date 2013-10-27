@@ -33,28 +33,42 @@ Ploth.newModel = function(opts){
     ctx.lineTo(yis, canvas.height);
     ctx.stroke();
 
-    ctx.strokeStyle = '#000';
-
-    ctx.beginPath();
-
     var numSteps = 500;
+    var toDraw = [];
+
     for (var i = 0; i < numSteps; ++i) {
       var u = i/numSteps;
 
       var x = inRange(u, xLow, xHigh);
-      var y = f(x, t);
+      var ys = f(x, t);
 
-      var yu = (y-yLow)/(yHigh-yLow);
-
-      var xn =                 inRange(u,  0, Number(canvas.width));
-      var yn = canvas.height - inRange(yu, 0, Number(canvas.height));
-
-      if (i == 0) ctx.moveTo(xn, yn);
-      else        ctx.lineTo(xn, yn);
+      for (var j = 0; j < ys.length; ++j) {
+        if (toDraw.length <= j)
+          toDraw.push([]);
+        toDraw[j].push(ys[j]);
+      }
     }
 
-    ctx.stroke();
-  }
+    for (var i = 0; i < toDraw.length; ++i) {
+      ctx.strokeStyle = '#000';
+      ctx.beginPath();
+
+      for (var j = 0; j < numSteps; ++j) {
+        var u = j/numSteps;
+        var y = toDraw[i][j];
+
+        var yu = (y-yLow)/(yHigh-yLow);
+
+        var xn =                 inRange(u,  0, Number(canvas.width));
+        var yn = canvas.height - inRange(yu, 0, Number(canvas.height));
+
+        if (j == 0) ctx.moveTo(xn, yn);
+        else        ctx.lineTo(xn, yn);
+      }
+
+      ctx.stroke();
+    }
+  };
 
   return {
     draw: draw
@@ -88,7 +102,7 @@ var decodeSetup = function(ss){
 };
 
 var DEFAULT_Q = (
-  'OCQkNDIkJHkkJDQyJCQ1KmNvcyh4KSAqIHNpbih4KzQqVCtyYW5kb20oKSkkJDQyJCQkJDQyJCQkJDQyJCQkJDQyJCQkJDQyJCQkJDQyJCQkJDQyJCQkJDQyJCQkJDQyJCQkJDQyJCQkJDQyJCRUJCQ0MiQkLXQvOEUyJCQ0MiQkdCQkNDIkJDAkJDQyJCQtMSQkNDIkJDEwJCQ0MiQkLTEwJCQ0MiQkMTA='
+  'OCQkNDIkJHkxJCQ0MiQkLXkyJCQ0MiQkeTIkJDQyJCQ1KmNvcyh4KSAqIHNpbih4KzQqVCtyYW5kb20oKSkkJDQyJCQkJDQyJCQkJDQyJCQkJDQyJCQkJDQyJCQkJDQyJCQkJDQyJCQkJDQyJCQkJDQyJCRUJCQ0MiQkLXQvOEUyJCQ0MiQkdCQkNDIkJDAkJDQyJCQtMSQkNDIkJDEwJCQ0MiQkLTEwJCQ0MiQkMTA='
 );
 
 var WARNING = (
@@ -138,11 +152,11 @@ $(document).ready(function(){
       defEl.attr('value',  d);
     }
 
-    if (isYEl) nameEl.attr('value', 'y');
-    if (isTEl) { nameEl.attr('value', 't'); timeEquationEl = ref; }
-
-    if (isYEl || isTEl)
+    if (isTEl) { 
+      nameEl.attr('value', 't'); 
       nameEl.attr('readonly', 'readonly');
+      timeEquationEl = ref; 
+    }
   }
 
   _.each(['xLow', 'xHigh', 'yLow', 'yHigh'], function(n, i){
@@ -162,13 +176,18 @@ $(document).ready(function(){
             'SQRT2', 'SQRT1_2'], 
       function(n){ code += 'var '+n+' = Math.'+n+';' });
 
+    code += 'var res = [];';
+
     for (var i = numVars-2; i >= 0; --i) {
       var n = equations[i][0].val(),
           e = equations[i][1].val()
-      if ($.trim(e) !== '')
+      if ($.trim(e) !== '') {
         code += 'var ' + n + ' = ' + e + ';\n';
+        if (n.indexOf('y') == 0)
+          code += 'res.push(' + n + ');\n';
+      }
     }
-    code += 'return y;\n';
+    code += 'return res;\n';
 
     try {
       var f = new Function(['x', 't'], code);
