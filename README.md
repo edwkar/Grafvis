@@ -1,5 +1,7 @@
-Edster Beta aka. Graf Vis
-=======
+# Edster Beta aka. Graf Vis
+
+
+<hr />
 
 Dirt-simple dynamic plotting.
 
