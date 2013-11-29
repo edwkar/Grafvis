@@ -14,8 +14,10 @@ Ploth.newModel = function(opts){
   var inRange = function(x, low, high) { return low + x*(high-low); };
 
   var draw = function(f, xLow, xHigh, yLow, yHigh, t){
-    ctx.fillStyle = '#ffe';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+    //ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     var isect = function(v, low, high){ return (v - low)/(high-low); };
 

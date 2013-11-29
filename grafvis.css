@@ -1,0 +1,82 @@
+@import url(http://fonts.googleapis.com/css?family=Covered+By+Your+Grace);
+
+body {
+  font: 12px/1em monospace;
+  margin-top: 20px;
+  background: url(./graphics/old_mathematics.png);
+}
+
+h1 {
+  font: 36px/1em 'Covered By Your Grace', cursive;
+  margin: 20px 0 18px;
+  text-align: center;
+  text-transform: uppercase;
+}
+h1 span,
+h2 {
+  font: 18px/1em 'Covered By Your Grace', cursive;
+  margin: 0 0 10px 1px;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-block;
+  background: orange;
+  transform:rotate(-1deg);
+  -webkit-transform:rotate(-1deg);
+  box-shadow: 1px 3px 3px 0px;
+  padding: 3px 9px 3px 5px;
+}
+
+canvas {
+  margin-left: -70px;
+  margin-bottom: 20px;
+  width: 1040px;
+  border-radius: 10px;
+  box-shadow: 1px 3px 15px 0px;
+  background: rgba(253, 254, 255, 0.9);
+}
+
+.sep {
+  margin: 10px 0 15px -30px;
+  width: 960px;
+  height: 1px;
+  background: #aaa;
+  box-shadow: 0px -3px 15px 0px rgba(0, 0, 0, 0.4);
+}
+
+input, textarea {
+  font: 12px/1em monospace;
+  background: #eee;
+  border: 1px solid rgba(1, 1, 1, 0.4);
+  box-shadow: 5px 6px 15px -6px rgba(0, 0, 0, 0.3);
+}
+
+.container {
+  margin: 0 auto;
+  width: 900px;
+  padding: 5px 30px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 2px 10px 10px 10px;
+  box-shadow: 1px 3px 15px 0px rgba(0, 0, 0, 0.6);
+  clear: both;
+}
+
+.controls {
+  margin: 0 auto;
+  width: 800px;
+}
+
+.controls .panel {
+  width: 400px;
+  float: left;
+  margin: 0 0 30px;
+}
+
+#url {
+  width: 300px;
+  height: 100px;
+  overflow: none;
+}
+
+.clear { 
+  clear: both;
+}
